@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ronald | Sales Operations & CRM Professional</title>
+<style>
+  :root {
+    --navy: #080e27;
+    --navy2: #0d1a3e;
+    --navy3: #162050;
+    --gold: #c9a84c;
+    --gold2: #e8c96a;
+    --gold3: #f5dfa0;
+    --white: #f0f2fa;
+    --muted: #8a94b8;
+    --card: rgba(22,32,80,0.7);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { background:var(--navy); color:var(--white); font-family:'Segoe UI',system-ui,sans-serif; overflow-x:hidden; }
+
+  /* NAV */
+  nav {
+    position:fixed; top:0; width:100%; z-index:100;
+    padding:1rem 2.5rem; display:flex; justify-content:space-between; align-items:center;
+    background:rgba(8,14,39,0.85); backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(201,168,76,0.15);
+  }
+  .logo { font-size:1.3rem; font-weight:700; color:var(--gold); letter-spacing:2px; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { color:var(--muted); text-decoration:none; font-size:.85rem; letter-spacing:1px; text-transform:uppercase; transition:.3s; }
+  .nav-links a:hover { color:var(--gold); }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden; text-align:center; padding:2rem;
+  }
+  .hero-bg {
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(30,60,180,0.18) 0%, transparent 50%),
+                linear-gradient(135deg, #080e27 0%, #0d1a3e 50%, #080e27 100%);
+  }
+  canvas#particles { position:absolute; inset:0; }
+  .hero-content { position:relative; z-index:2; max-width:800px; }
+  .hero-badge {
+    display:inline-block; padding:.4rem 1.2rem; border:1px solid var(--gold);
+    border-radius:2rem; font-size:.75rem; letter-spacing:2px; text-transform:uppercase;
+    color:var(--gold); margin-bottom:1.5rem; animation:fadeDown .8s ease both;
+  }
+  .hero-name {
+    font-size:clamp(3rem,8vw,6rem); font-weight:800; line-height:1;
+    background:linear-gradient(135deg, var(--white) 40%, var(--gold2) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    animation:fadeDown .8s .2s ease both;
+  }
+  .hero-title {
+    font-size:clamp(1rem,2.5vw,1.3rem); color:var(--muted); margin:1rem 0 2rem;
+    animation:fadeDown .8s .4s ease both; letter-spacing:1px;
+  }
+  .hero-title span { color:var(--gold); }
+  .hero-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; animation:fadeDown .8s .6s ease both; }
+  .btn-primary {
+    padding:.85rem 2rem; background:linear-gradient(135deg,var(--gold),var(--gold2));
+    color:var(--navy); border:none; border-radius:.5rem; font-weight:700;
+    font-size:.9rem; cursor:pointer; letter-spacing:1px; transition:.3s;
+    text-decoration:none;
+  }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 8px 25px rgba(201,168,76,0.4); }
+  .btn-outline {
+    padding:.85rem 2rem; background:transparent; color:var(--gold);
+    border:1.5px solid var(--gold); border-radius:.5rem; font-weight:600;
+    font-size:.9rem; cursor:pointer; letter-spacing:1px; transition:.3s;
+    text-decoration:none;
+  }
+  .btn-outline:hover { background:rgba(201,168,76,0.1); transform:translateY(-3px); }
+  .scroll-hint {
+    position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+    color:var(--muted); font-size:.75rem; letter-spacing:2px; text-transform:uppercase;
+    animation:bounce 2s infinite; z-index:2;
+  }
+
+  /* SECTIONS */
+  section { padding:6rem 2rem; }
+  .container { max-width:1100px; margin:0 auto; }
+  .section-label { font-size:.75rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:.5rem; }
+  .section-title { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:800; margin-bottom:3rem; }
+  .section-title span { color:var(--gold); }
+  .divider { width:60px; height:3px; background:linear-gradient(90deg,var(--gold),transparent); margin-bottom:3rem; border-radius:2px; }
+
+  /* ABOUT */
+  #about { background:var(--navy2); }
+  .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; }
+  .about-text p { color:var(--muted); line-height:1.9; font-size:1.02rem; margin-bottom:1.2rem; }
+  .about-text p span { color:var(--gold2); font-weight:600; }
+  .about-stats { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .stat-card {
+    background:var(--card); border:1px solid rgba(201,168,76,0.15);
+    border-radius:1rem; padding:1.5rem; text-align:center;
+    backdrop-filter:blur(8px); transition:.3s;
+  }
+  .stat-card:hover { border-color:var(--gold); transform:translateY(-4px); }
+  .stat-num { font-size:2.2rem; font-weight:800; color:var(--gold); }
+  .stat-label { font-size:.8rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+
+  /* SKILLS */
+  #skills { background:var(--navy); }
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+  .skill-card {
+    background:var(--card); border:1px solid rgba(201,168,76,0.1);
+    border-radius:1rem; padding:1.8rem; backdrop-filter:blur(8px);
+    transition:.3s; position:relative; overflow:hidden;
+  }
+  .skill-card::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg,var(--gold),transparent);
+  }
+  .skill-card:hover { border-color:rgba(201,168,76,0.4); transform:translateY(-5px); box-shadow:0 15px 40px rgba(0,0,0,0.3); }
+  .skill-icon { font-size:2rem; margin-bottom:.8rem; }
+  .skill-name { font-weight:700; font-size:1.05rem; margin-bottom:.4rem; }
+  .skill-desc { color:var(--muted); font-size:.85rem; line-height:1.6; margin-bottom:1rem; }
+  .skill-bar { height:4px; background:rgba(255,255,255,0.1); border-radius:2px; overflow:hidden; }
+  .skill-fill { height:100%; border-radius:2px; background:linear-gradient(90deg,var(--gold),var(--gold2)); transition:width 1.5s ease; }
+
+  /* PROJECTS */
+  #projects { background:var(--navy2); }
+  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:2rem; }
+  .project-card {
+    background:var(--card); border:1px solid rgba(201,168,76,0.1);
+    border-radius:1.2rem; padding:2rem; backdrop-filter:blur(8px); transition:.3s;
+  }
+  .project-card:hover { border-color:var(--gold); transform:translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+  .project-tag {
+    display:inline-block; padding:.3rem .9rem; background:rgba(201,168,76,0.15);
+    color:var(--gold); font-size:.72rem; letter-spacing:1px; text-transform:uppercase;
+    border-radius:2rem; margin-bottom:1rem;
+  }
+  .project-title { font-size:1.25rem; font-weight:700; margin-bottom:.8rem; }
+  .project-desc { color:var(--muted); font-size:.9rem; line-height:1.7; margin-bottom:1.5rem; }
+  .pipeline { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; margin-top:1rem; }
+  .pipe-step {
+    background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.3);
+    color:var(--gold2); font-size:.75rem; padding:.3rem .8rem; border-radius:.4rem; font-weight:600;
+  }
+  .pipe-arrow { color:var(--gold); font-size:.9rem; }
+
+  /* EXPERIENCE */
+  #experience { background:var(--navy); }
+  .timeline { position:relative; padding-left:2rem; }
+  .timeline::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--gold),transparent); }
+  .timeline-item { position:relative; margin-bottom:3rem; padding-left:2rem; }
+  .timeline-dot {
+    position:absolute; left:-2.45rem; top:.3rem; width:14px; height:14px;
+    border-radius:50%; background:var(--gold); border:3px solid var(--navy);
+    box-shadow:0 0 10px rgba(201,168,76,0.5);
+  }
+  .timeline-date { font-size:.78rem; color:var(--gold); letter-spacing:1px; text-transform:uppercase; margin-bottom:.4rem; }
+  .timeline-role { font-size:1.15rem; font-weight:700; }
+  .timeline-company { color:var(--muted); font-size:.9rem; margin-bottom:.6rem; }
+  .timeline-desc { color:var(--muted); font-size:.9rem; line-height:1.7; }
+
+  /* EDUCATION */
+  #education { background:var(--navy2); }
+  .edu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; }
+  .edu-card {
+    background:var(--card); border:1px solid rgba(201,168,76,0.15);
+    border-radius:1.2rem; padding:2rem; backdrop-filter:blur(8px); transition:.3s;
+    position:relative; overflow:hidden;
+  }
+  .edu-card:hover { border-color:var(--gold); transform:translateY(-5px); }
+  .edu-card::after {
+    content:'🎓'; position:absolute; right:1.5rem; top:1.5rem; font-size:2rem; opacity:.15;
+  }
+  .edu-degree { font-size:1.15rem; font-weight:700; margin-bottom:.4rem; }
+  .edu-school { color:var(--gold); font-size:.9rem; font-weight:600; margin-bottom:.3rem; }
+  .edu-detail { color:var(--muted); font-size:.85rem; line-height:1.6; }
+
+  /* TARGET */
+  #target { background:var(--navy); }
+  .target-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
+  .target-list { list-style:none; }
+  .target-list li {
+    padding:.9rem 0; border-bottom:1px solid rgba(201,168,76,0.1);
+    display:flex; align-items:center; gap:.8rem; color:var(--muted); font-size:.95rem;
+  }
+  .target-list li::before { content:'▸'; color:var(--gold); font-size:1rem; }
+
+  /* CONTACT */
+  #contact { background:var(--navy2); text-align:center; }
+  .contact-card {
+    max-width:600px; margin:0 auto;
+    background:var(--card); border:1px solid rgba(201,168,76,0.2);
+    border-radius:1.5rem; padding:3.5rem; backdrop-filter:blur(8px);
+  }
+  .contact-card p { color:var(--muted); margin-bottom:2rem; line-height:1.8; }
+  .contact-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+
+  /* FOOTER */
+  footer { padding:2rem; text-align:center; color:var(--muted); font-size:.8rem; border-top:1px solid rgba(201,168,76,0.1); }
+  footer span { color:var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes bounce { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(8px); } }
+  .reveal { opacity:0; transform:translateY(30px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  @media(max-width:768px) {
+    .about-grid, .target-grid { grid-template-columns:1fr; gap:2rem; }
+    .nav-links { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">R.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <canvas id="particles"></canvas>
+  <div class="hero-content">
+    <div class="hero-badge">Available for New Opportunities</div>
+    <h1 class="hero-name">Ronald</h1>
+    <p class="hero-title">
+      <span>Sales Operations</span> · CRM Solutions · <span>Technical Project Management</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ scroll</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">Where <span>Strategy</span> Meets Technology</h2>
+        <div class="divider"></div>
+        <p>I am a results-driven professional with an <span>MBA from INCAE Business School</span> and an international exchange at <span>UNC Kenan-Flagler Business School</span>, combining executive-level business thinking with deep technical expertise.</p>
+        <p>With a career spanning sales operations, CRM implementations, and AI-driven automation, I bridge the gap between business goals and technology solutions — delivering measurable impact at scale.</p>
+        <p>I hold an <span>Employment Authorization Document (EAD)</span> and am actively targeting roles at organizations such as <span>Google, Amazon, PwC, and Deloitte</span>.</p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">Years Salesforce</div></div>
+        <div class="stat-card"><div class="stat-num">MBA</div><div class="stat-label">INCAE & UNC</div></div>
+        <div class="stat-card"><div class="stat-num">6+</div><div class="stat-label">Years Solutions Eng.</div></div>
+        <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">System AI Pipeline</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label reveal">Core Competencies</p>
+    <h2 class="section-title reveal">Skills & <span>Tools</span></h2>
+    <div class="divider reveal"></div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-name">Salesforce CRM</div>
+        <div class="skill-desc">3+ years of direct CRM implementation, pipeline management, and solutions delivery across enterprise environments.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="85" style="width:0%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🗄️</div>
+        <div class="skill-name">SQL & Data Analysis</div>
+        <div class="skill-desc">Proficient in querying, structuring, and analyzing data to support operational decisions and reporting needs.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="75" style="width:0%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📊</div>
+        <div class="skill-name">Excel & Pivot Tables</div>
+        <div class="skill-desc">Advanced data modeling, pivot analysis, and dashboard creation to support sales operations and forecasting.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="90" style="width:0%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">RapidMiner & AI Tools</div>
+        <div class="skill-desc">Machine learning pipeline design and AI-driven automation for data extraction and process optimization.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="70" style="width:0%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔄</div>
+        <div class="skill-name">Scrum / Agile PM</div>
+        <div class="skill-desc">Product Owner experience managing cross-functional Scrum teams through full sprint cycles and deliverables.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="80" style="width:0%"></div></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📐</div>
+        <div class="skill-name">Technical Project Management</div>
+        <div class="skill-desc">End-to-end delivery of multi-system technical projects, including requirements definition, stakeholder alignment, and execution.</div>
+        <div class="skill-bar"><div class="skill-fill" data-w="82" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label reveal">Featured Work</p>
+    <h2 class="section-title reveal">Key <span>Projects</span></h2>
+    <div class="divider reveal"></div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <span class="project-tag">AI Automation · Agile</span>
+        <div class="project-title">AI Bot Agent — Document Data Extraction Pipeline</div>
+        <div class="project-desc">
+          Led the design and Scrum-managed delivery of an intelligent automation pipeline that extracts and processes document data across four integrated enterprise systems. Reduced manual processing time and improved data accuracy at scale.
+        </div>
+        <div class="pipeline">
+          <span class="pipe-step">Coperniq</span>
+          <span class="pipe-arrow">→</span>
+          <span class="pipe-step">Noah</span>
+          <span class="pipe-arrow">→</span>
+          <span class="pipe-step">SMA Cloud</span>
+          <span class="pipe-arrow">→</span>
+          <span class="pipe-step">BIA1</span>
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-tag">Sales Ops · CRM</span>
+        <div class="project-title">Sales Operations Transformation</div>
+        <div class="project-desc">
+          Architected and implemented CRM workflows using Salesforce to streamline pipeline visibility, automate reporting, and align cross-functional sales and operations teams around unified data — driving improved forecast accuracy and team performance.
+        </div>
+      </div>
+      <div class="project-card reveal">
+        <span class="project-tag">Product Concept · AR</span>
+        <div class="project-title">Virtual Interior Designer App</div>
+        <div class="project-desc">
+          Conceptualized an AR-based room visualization platform that connects homeowners with local interior designers. Designed the product vision, user journey, and go-to-market strategy, combining technology innovation with marketplace business models.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label reveal">Career Path</p>
+    <h2 class="section-title reveal">Professional <span>Experience</span></h2>
+    <div class="divider reveal"></div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2024 – Present</div>
+        <div class="timeline-role">Sales Operations Professional</div>
+        <div class="timeline-company">AI Automation & CRM Solutions</div>
+        <div class="timeline-desc">Leading AI Bot Agent automation project, managing Scrum delivery across a four-system pipeline. Driving CRM process improvements and technical project management initiatives targeting enterprise clients.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Oct 2023 – Feb 2024</div>
+        <div class="timeline-role">Sales Representative</div>
+        <div class="timeline-company">Terra · Solar Energy</div>
+        <div class="timeline-desc">Managed end-to-end solar energy sales cycle, developing client relationship skills and gaining exposure to renewable energy market dynamics.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Sept 2019 – Apr 2022</div>
+        <div class="timeline-role">Solutions Delivery Manager</div>
+        <div class="timeline-company">Sistematica</div>
+        <div class="timeline-desc">Oversaw delivery of technology solutions, acting as the key liaison between business stakeholders and technical teams. Led business analysis, requirements gathering, and project execution across multiple client engagements.</div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2022 – 2023</div>
+        <div class="timeline-role">Career Break — U.S. Relocation & Residency Process</div>
+        <div class="timeline-company">Self-Managed · EB-2 NIW</div>
+        <div class="timeline-desc">Strategically managed an international relocation and self-directed U.S. immigration process (EB-2 NIW), demonstrating exceptional organizational, legal research, and long-term planning capabilities.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <p class="section-label reveal">Academic Background</p>
+    <h2 class="section-title reveal">Education & <span>Credentials</span></h2>
+    <div class="divider reveal"></div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-degree">Master of Business Administration (MBA)</div>
+        <div class="edu-school">INCAE Business School · Costa Rica</div>
+        <div class="edu-detail">One of Latin America's top-ranked business schools. Focused on strategic management, operations, and innovation. Graduated with a strong foundation in global business leadership.</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-degree">MBA Exchange Program</div>
+        <div class="edu-school">Kenan-Flagler Business School · UNC Chapel Hill</div>
+        <div class="edu-detail">International exchange semester at one of the top-15 MBA programs in the United States, gaining exposure to U.S. business culture, corporate strategy, and cross-cultural leadership.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET -->
+<section id="target">
+  <div class="container">
+    <p class="section-label reveal">What I'm Looking For</p>
+    <h2 class="section-title reveal">Target <span>Roles & Companies</span></h2>
+    <div class="divider reveal"></div>
+    <div class="target-grid">
+      <div class="reveal">
+        <h3 style="margin-bottom:1rem;color:var(--gold2);">Target Roles</h3>
+        <ul class="target-list">
+          <li>Sales Operations Manager / Analyst</li>
+          <li>Technical Project Manager</li>
+          <li>CRM Solutions Consultant</li>
+          <li>IT Manager / Workday Systems</li>
+          <li>Business Analyst — Enterprise Solutions</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <h3 style="margin-bottom:1rem;color:var(--gold2);">Target Organizations</h3>
+        <ul class="target-list">
+          <li>Google</li>
+          <li>Amazon</li>
+          <li>PwC</li>
+          <li>Deloitte</li>
+          <li>Large-Scale Enterprise & Tech Companies</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label reveal">Let's Connect</p>
+    <h2 class="section-title reveal" style="text-align:center">Ready to <span>Work Together?</span></h2>
+    <div class="contact-card reveal">
+      <p>I am actively exploring new opportunities in Sales Operations, CRM Solutions, and Technical Project Management. If you are looking for a results-driven professional who brings both strategic thinking and technical depth — let's talk.</p>
+      <div class="contact-btns">
+        <a href="mailto:your@email.com" class="btn-primary">✉ Send Email</a>
+        <a href="https://linkedin.com" target="_blank" class="btn-outline">LinkedIn Profile</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Designed & built by <span>Ronald</span> · 2026 · All rights reserved.</p>
+</footer>
+
+<script>
+// Particles
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let pts = [];
+function resize() { canvas.width = innerWidth; canvas.height = innerHeight; }
+resize(); window.addEventListener('resize', resize);
+for(let i=0;i<80;i++) pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.5+.5});
+function draw() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  pts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width) p.vx*=-1;
+    if(p.y<0||p.y>canvas.height) p.vy*=-1;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(201,168,76,0.5)'; ctx.fill();
+  });
+  pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{
+    const d=Math.hypot(a.x-b.x,a.y-b.y);
+    if(d<120){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(201,168,76,${.12*(1-d/120)})`;ctx.stroke();}
+  }));
+  requestAnimationFrame(draw);
+}
+draw();
+
+// Reveal on scroll
+const revealEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); } });
+},{threshold:.15});
+revealEls.forEach(el=>obs.observe(el));
+
+// Skill bar animation
+const bars = document.querySelectorAll('.skill-fill');
+const barObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.width=e.target.dataset.w+'%'; } });
+},{threshold:.5});
+bars.forEach(b=>barObs.observe(b));
+</script>
+</body>
+</html>
