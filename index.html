@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ronald Rivas | CRM & Sales Operations</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --bg:#0a0a0a; --bg2:#111111; --bg3:#161616;
+    --border:rgba(255,255,255,0.08); --border2:rgba(255,255,255,0.14);
+    --white:#ffffff; --off:#f0f0f0;
+    --muted:rgba(255,255,255,0.45); --subtle:rgba(255,255,255,0.2);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;width:100%;z-index:100;
+    padding:1.1rem 3rem;display:flex;justify-content:space-between;align-items:center;
+    background:rgba(10,10,10,0.92);backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--white);letter-spacing:.5px;}
+  .nav-links{display:flex;gap:2.5rem;list-style:none;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;transition:.2s;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-cta{padding:.55rem 1.5rem;background:var(--white);color:var(--bg);border-radius:.3rem;font-size:.78rem;font-weight:700;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:.2s;}
+  .nav-cta:hover{background:var(--off);}
+
+  /* HERO */
+  #hero{
+    min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+    padding:7rem 0 0;overflow:hidden;
+  }
+  .hero-left{
+    padding:5rem 4rem 5rem 3rem;display:flex;flex-direction:column;
+    justify-content:center;border-right:1px solid var(--border);
+  }
+  .hero-eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:2rem;display:flex;align-items:center;gap:.8rem;}
+  .hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--white);}
+  .hero-name{font-family:'Playfair Display',serif;font-size:clamp(3.5rem,6vw,6.5rem);line-height:.95;color:var(--white);font-weight:900;margin-bottom:2rem;letter-spacing:-2px;}
+  .hero-name em{font-style:italic;color:var(--muted);}
+  .hero-divider{width:48px;height:1px;background:var(--white);margin-bottom:2rem;opacity:.3;}
+  .hero-sub{font-size:1rem;color:var(--muted);line-height:1.9;max-width:440px;margin-bottom:3rem;}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+  .btn-filled{padding:.85rem 2rem;background:var(--white);color:var(--bg);border-radius:.3rem;font-weight:700;font-size:.82rem;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:.2s;}
+  .btn-filled:hover{background:var(--off);transform:translateY(-2px);}
+  .btn-outline{padding:.85rem 2rem;background:transparent;color:var(--white);border:1.5px solid var(--border2);border-radius:.3rem;font-weight:600;font-size:.82rem;text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:.2s;}
+  .btn-outline:hover{border-color:var(--white);}
+
+  /* HERO RIGHT */
+  .hero-right{position:relative;background:var(--bg2);overflow:hidden;}
+  .hero-photo{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.1);display:block;}
+  .hero-photo-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;background:var(--bg2);color:var(--muted);}
+  .placeholder-icon{font-size:5rem;opacity:.2;}
+  .placeholder-text{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;opacity:.4;}
+  .hero-overlay{position:absolute;bottom:0;left:0;right:0;padding:2rem;background:linear-gradient(transparent,rgba(0,0,0,.8));}
+  .hero-overlay-name{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--white);font-weight:700;}
+  .hero-overlay-title{font-size:.72rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:.25rem;}
+
+  /* STATS BAR */
+  .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);}
+  .stat-box{padding:2rem 2.5rem;border-right:1px solid var(--border);text-align:center;}
+  .stat-box:last-child{border-right:none;}
+  .stat-n{font-family:'Playfair Display',serif;font-size:2.8rem;color:var(--white);font-weight:900;line-height:1;}
+  .stat-l{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.4rem;}
+
+  /* SECTIONS */
+  .section{padding:7rem 3rem;}
+  .section-inner{max-width:1100px;margin:0 auto;}
+  .section-alt{background:var(--bg2);}
+  .eyebrow{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:.8rem;display:flex;align-items:center;gap:.7rem;}
+  .eyebrow::before{content:'';width:20px;height:1px;background:var(--white);}
+  .section-heading{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);color:var(--white);line-height:1.1;margin-bottom:3.5rem;font-weight:900;letter-spacing:-1px;}
+  .section-heading em{font-style:italic;color:var(--muted);}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:3fr 2fr;gap:5rem;align-items:start;}
+  .about-body p{color:var(--muted);line-height:2;font-size:.97rem;margin-bottom:1.3rem;}
+  .about-body p strong{color:var(--white);font-weight:700;}
+  .about-sidebar{display:flex;flex-direction:column;gap:0;}
+  .sidebar-item{padding:1.4rem 0;border-bottom:1px solid var(--border);}
+  .sidebar-item:first-child{border-top:1px solid var(--border);}
+  .sidebar-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.3rem;}
+  .sidebar-val{font-size:.95rem;font-weight:700;color:var(--white);}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);}
+  .skill-item{padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:.2s;}
+  .skill-item:nth-child(3n){border-right:none;}
+  .skill-item:nth-child(n+4){border-bottom:none;}
+  .skill-item:hover{background:var(--white);}
+  .skill-item:hover .skill-name,.skill-item:hover .skill-pct,.skill-item:hover .skill-desc{color:var(--bg);}
+  .skill-item:hover .skill-bar-bg{background:rgba(0,0,0,.15);}
+  .skill-item:hover .skill-fill{background:var(--bg);}
+  .skill-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+  .skill-name{font-weight:700;font-size:.9rem;color:var(--white);transition:.2s;}
+  .skill-pct{font-size:.8rem;font-weight:700;color:var(--muted);transition:.2s;}
+  .skill-bar-bg{height:2px;background:var(--border2);transition:.2s;}
+  .skill-fill{height:100%;width:0;background:var(--white);transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+  .skill-desc{font-size:.8rem;color:var(--muted);margin-top:.8rem;line-height:1.65;transition:.2s;}
+
+  /* PROJECTS */
+  .projects-list{display:flex;flex-direction:column;border:1px solid var(--border);}
+  .project-row{display:grid;grid-template-columns:80px 1fr auto;gap:2.5rem;padding:2.5rem;border-bottom:1px solid var(--border);align-items:start;transition:.25s;cursor:default;}
+  .project-row:last-child{border-bottom:none;}
+  .project-row:hover{background:var(--white);}
+  .project-row:hover .project-num,.project-row:hover .project-tag,.project-row:hover .project-title,.project-row:hover .project-desc{color:var(--bg);}
+  .project-row:hover .tag{background:rgba(0,0,0,.08);border-color:rgba(0,0,0,.15);color:var(--bg);}
+  .project-row:hover .project-arrow{color:var(--bg);transform:rotate(45deg);}
+  .project-num{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--border2);font-weight:900;line-height:1;transition:.2s;}
+  .project-tag{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:600;margin-bottom:.5rem;transition:.2s;}
+  .project-title{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.6rem;transition:.2s;}
+  .project-desc{font-size:.85rem;color:var(--muted);line-height:1.8;margin-bottom:1rem;transition:.2s;}
+  .project-tags{display:flex;gap:.4rem;flex-wrap:wrap;}
+  .tag{padding:.25rem .75rem;background:var(--bg3);border:1px solid var(--border);font-size:.68rem;color:var(--muted);border-radius:.2rem;font-weight:500;transition:.2s;}
+  .project-arrow{font-size:1.5rem;color:var(--border2);margin-top:.3rem;transition:.3s;}
+
+  /* TIMELINE (Experience & Education) */
+  .timeline{position:relative;padding-left:2.5rem;}
+  .timeline::before{content:'';position:absolute;left:0;top:.4rem;bottom:1rem;width:1px;background:linear-gradient(180deg,var(--white),transparent);}
+  .tl-item{position:relative;margin-bottom:3.5rem;}
+  .tl-item:last-child{margin-bottom:0;}
+  .tl-dot{position:absolute;left:-2.85rem;top:.35rem;width:11px;height:11px;border-radius:50%;background:var(--white);border:2px solid var(--bg);box-shadow:0 0 0 1px var(--white);}
+  .tl-date{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;}
+  .tl-role{font-size:1.05rem;font-weight:800;color:var(--white);letter-spacing:-.3px;margin-bottom:.15rem;}
+  .tl-company{font-size:.82rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.75rem;}
+  .tl-desc{font-size:.88rem;color:var(--muted);line-height:1.85;}
+
+  /* EDUCATION TIMELINE with icon cards */
+  .edu-tl-item{display:grid;grid-template-columns:auto 1fr;gap:1.5rem;margin-bottom:3.5rem;position:relative;}
+  .edu-tl-item:last-child{margin-bottom:0;}
+  .edu-icon-box{width:52px;height:52px;border-radius:.6rem;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:var(--bg3);flex-shrink:0;margin-top:.2rem;}
+  .edu-tl-dot{position:absolute;left:-2.85rem;top:.7rem;width:11px;height:11px;border-radius:50%;background:var(--white);border:2px solid var(--bg);box-shadow:0 0 0 1px var(--white);}
+  .edu-degree{font-size:1.05rem;font-weight:800;color:var(--white);letter-spacing:-.3px;margin-bottom:.15rem;}
+  .edu-school{font-size:.82rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.6rem;}
+  .edu-desc{font-size:.86rem;color:var(--muted);line-height:1.8;}
+
+  /* CONTACT */
+  #contact{background:var(--bg);padding:7rem 3rem;border-top:1px solid var(--border);}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;max-width:1100px;margin:0 auto;}
+  .contact-p{color:var(--muted);font-size:.97rem;line-height:1.9;margin-bottom:2.5rem;}
+  .contact-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+  .contact-info{display:flex;flex-direction:column;border:1px solid var(--border);}
+  .contact-info-item{padding:1.6rem 1.8rem;border-bottom:1px solid var(--border);}
+  .contact-info-item:last-child{border-bottom:none;}
+  .ci-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem;}
+  .ci-val{font-size:.92rem;color:var(--white);font-weight:600;}
+
+  /* FOOTER */
+  footer{padding:1.5rem 3rem;background:var(--bg2);border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+  footer p{font-size:.75rem;color:var(--muted);}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+
+  @media(max-width:900px){
+    #hero{grid-template-columns:1fr;}.hero-right{height:60vw;}
+    .stats-bar{grid-template-columns:1fr 1fr;}
+    .about-grid,.skills-grid,.contact-grid{grid-template-columns:1fr;}
+    .skills-grid .skill-item{border-right:none;}
+    .exp-item{grid-template-columns:1fr;gap:.5rem;}
+    .project-row{grid-template-columns:1fr;}
+    .project-num,.project-arrow{display:none;}
+    nav{padding:1rem 1.5rem;}.nav-links{display:none;}
+    .section{padding:4rem 1.5rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Ronald Rivas</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Contact</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">CRM · Sales Operations · Technical PM</div>
+    <h1 class="hero-name">Ronald<br/><em>Rivas</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">MBA-trained professional specializing in Salesforce CRM, sales operations optimization, and enterprise solutions delivery — bridging business strategy with scalable technology.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-filled">View My Work</a>
+      <a href="#contact" class="btn-outline">Contact Me</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- ✏️ Replace YOUR_IMAGE_URL_HERE with your hosted photo link -->
+    <img id="profile-photo" class="hero-photo" src="YOUR_IMAGE_URL_HERE" alt="Ronald Rivas"
+      onerror="this.style.display='none';document.getElementById('photo-placeholder').style.display='flex';"/>
+    <div id="photo-placeholder" class="hero-photo-placeholder" style="display:none;">
+      <div class="placeholder-icon">👤</div>
+      <div class="placeholder-text">Upload your photo to imgbb.com and paste the URL above</div>
+    </div>
+    <div class="hero-overlay">
+      <div class="hero-overlay-name">Ronald Rivas</div>
+      <div class="hero-overlay-title">CRM & Sales Operations Professional</div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-box"><div class="stat-n">3+</div><div class="stat-l">Years Salesforce</div></div>
+  <div class="stat-box"><div class="stat-n">6+</div><div class="stat-l">Years in Solutions</div></div>
+  <div class="stat-box"><div class="stat-n">MBA</div><div class="stat-l">INCAE & UNC</div></div>
+  <div class="stat-box"><div class="stat-n">2</div><div class="stat-l">Languages</div></div>
+</div>
+
+<!-- ABOUT -->
+<section class="section section-alt" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-body">
+        <div class="eyebrow reveal">About</div>
+        <h2 class="section-heading reveal">Strategy-Driven.<br/><em>Technology-Enabled.</em></h2>
+        <p class="reveal">I am a results-oriented professional with an <strong>MBA from INCAE Business School</strong> — one of Latin America's most prestigious institutions — and an international exchange at <strong>UNC Kenan-Flagler Business School</strong>, ranked among the top 20 MBA programs in the United States.</p>
+        <p class="reveal d1">My career spans enterprise CRM implementation, sales operations optimization, and solutions delivery across complex, multi-stakeholder environments. I bring analytical rigor and executive-level communication to every engagement.</p>
+        <p class="reveal d2">I specialize in <strong>Salesforce CRM</strong>, translating business requirements into scalable technical solutions that align sales teams, streamline operations, and accelerate revenue outcomes.</p>
+      </div>
+      <div class="about-sidebar reveal">
+        <div class="sidebar-item"><div class="sidebar-label">Specialization</div><div class="sidebar-val">CRM Solutions & Sales Ops</div></div>
+        <div class="sidebar-item"><div class="sidebar-label">Core Platform</div><div class="sidebar-val">Salesforce CRM</div></div>
+        <div class="sidebar-item"><div class="sidebar-label">Methodology</div><div class="sidebar-val">Scrum / Agile</div></div>
+        <div class="sidebar-item"><div class="sidebar-label">Location</div><div class="sidebar-val">Miami, Florida</div></div>
+        <div class="sidebar-item"><div class="sidebar-label">Languages</div><div class="sidebar-val">English · Spanish</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Competencies</div>
+    <h2 class="section-heading reveal">Skills & <em>Tools</em></h2>
+    <div class="skills-grid">
+      <div class="skill-item reveal">
+        <div class="skill-top"><span class="skill-name">Salesforce CRM</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar-bg"><div class="skill-fill" data-w="85"></div></div>
+        <p class="skill-desc">CRM implementation, pipeline architecture, workflow automation, and enterprise solutions delivery.</p>
+      </div>
+      <div class="skill-item reveal d1">
+        <div class="skill-top"><span class="skill-name">SQL & Data Analysis</span><span class="skill-pct">75%</span></div>
+        <div class="skill-bar-bg"><div class="skill-fill" data-w="75"></div></div>
+        <p class="skill-desc">Querying, structuring, and interpreting data to support reporting and business decisions.</p>
+      </div>
+      <div class="skill-item reveal d2">
+        <div class="skill-top"><span class="skill-name">Excel & Pivot Tables</span><span class="skill-pct">90%</span></div>
+        <div class="skill-bar-bg"><div class="skill-fill" data-w="90"></div></div>
+        <p class="skill-desc">Advanced modeling, pivot analysis, and executive dashboards for sales forecasting.</p>
+      </div>
+      <div class="skill-item reveal">
+        <div class="skill-top"><span class="skill-name">Scrum / Agile PM</span><span class="skill-pct">80%</span></div>
+        <div class="skill-bar-bg"><div class="skill-fill" data-w="80"></div></div>
+        <p class="skill-desc">Product Owner managing cross-functional sprint cycles, backlog prioritization, and delivery.</p>
+      </div>
+      <div class="skill-item reveal d1">
+        <div class="skill-top"><span class="skill-name">RapidMiner</span><span class="skill-pct">70%</span></div>
+        <div class="skill-bar-bg"><div class="skill-fill" data-w="70"></div></div>
+        <p class="skill-desc">Machine learning pipeline design and data modeling for operational analytics.</p>
+      </div>
+      <div class="skill-item reveal d2">
+        <div class="skill-top"><span class="skill-name">Technical Project Mgmt</span><span class="skill-pct">82%</span></div>
+        <div class="skill-bar-bg"><div class="skill-fill" data-w="82"></div></div>
+        <p class="skill-desc">End-to-end enterprise project delivery with full stakeholder alignment and execution ownership.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section section-alt" id="projects">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Featured Work</div>
+    <h2 class="section-heading reveal">CRM & Salesforce <em>Implementations</em></h2>
+    <div class="projects-list">
+      <div class="project-row reveal">
+        <div class="project-num">01</div>
+        <div>
+          <div class="project-tag">Salesforce · CRM Implementation</div>
+          <div class="project-title">Enterprise CRM Implementation & Pipeline Architecture</div>
+          <p class="project-desc">Led end-to-end Salesforce CRM implementation for a multi-team sales organization — defining requirements, configuring pipeline stages, and establishing reporting frameworks that gave leadership real-time revenue visibility.</p>
+          <div class="project-tags"><span class="tag">Salesforce</span><span class="tag">Pipeline Management</span><span class="tag">Requirements</span><span class="tag">Stakeholder Alignment</span></div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <div class="project-row reveal">
+        <div class="project-num">02</div>
+        <div>
+          <div class="project-tag">CRM · Data Migration</div>
+          <div class="project-title">CRM Data Migration & Process Standardization</div>
+          <p class="project-desc">Designed and executed a structured data migration into Salesforce, preserving data integrity with zero operational disruption. Standardized field structures, validation rules, and user permissions across departments.</p>
+          <div class="project-tags"><span class="tag">Data Migration</span><span class="tag">Salesforce Admin</span><span class="tag">Process Design</span><span class="tag">QA</span></div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+      <div class="project-row reveal">
+        <div class="project-num">03</div>
+        <div>
+          <div class="project-tag">Sales Operations · Automation</div>
+          <div class="project-title">Sales Process Automation via CRM Workflow Engine</div>
+          <p class="project-desc">Architected automated CRM workflows eliminating manual handoffs between sales and operations. Reduced reporting cycle time and improved data accuracy, enabling faster, data-driven decisions on pipeline and quota attainment.</p>
+          <div class="project-tags"><span class="tag">Workflow Automation</span><span class="tag">Sales Ops</span><span class="tag">Salesforce Flows</span><span class="tag">KPI Reporting</span></div>
+        </div>
+        <div class="project-arrow">↗</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Career</div>
+    <h2 class="section-heading reveal">Professional <em>Experience</em></h2>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2024 – Present</div>
+        <div class="tl-role">Sales Operations Professional</div>
+        <div class="tl-company">CRM Solutions & Enterprise Delivery</div>
+        <p class="tl-desc">Driving CRM implementation projects and leading technical project management initiatives across enterprise environments. Focused on aligning sales processes with scalable technology to improve operational efficiency and revenue visibility.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Oct 2023 – Feb 2024</div>
+        <div class="tl-role">SaaS Product Owner</div>
+        <div class="tl-company">Terra · Solar Energy</div>
+        <p class="tl-desc">Acted as Product Owner for a SaaS-based sales platform, managing the product backlog, coordinating with development and operations teams, and ensuring sprint deliverables aligned with business priorities and customer needs.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Sept 2019 – Apr 2022</div>
+        <div class="tl-role">Solutions Delivery Manager</div>
+        <div class="tl-company">Sistematica</div>
+        <p class="tl-desc">Primary liaison between business stakeholders and technical teams across multiple enterprise client engagements. Owned business analysis, requirements definition, and end-to-end project execution — delivering technology solutions on time and within scope.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">2022 – 2023</div>
+        <div class="tl-role">Career Break — U.S. Relocation</div>
+        <div class="tl-company">International Transition</div>
+        <p class="tl-desc">Managed a structured international relocation to the United States, demonstrating long-term planning, legal research proficiency, and disciplined self-management throughout a complex multi-stage transition.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="section section-alt" id="education">
+  <div class="section-inner">
+    <div class="eyebrow reveal">Academic Background</div>
+    <h2 class="section-heading reveal">Education & <em>Credentials</em></h2>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="edu-tl-item">
+          <div class="edu-icon-box">🎓</div>
+          <div>
+            <div class="tl-date">MBA</div>
+            <div class="edu-degree">Master of Business Administration</div>
+            <div class="edu-school">INCAE Business School · Costa Rica</div>
+            <p class="edu-desc">One of Latin America's most prestigious MBA programs. Focused on strategic management, operations, and innovation with strong emphasis on global business leadership and analytical decision-making.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="edu-tl-item">
+          <div class="edu-icon-box">🏛️</div>
+          <div>
+            <div class="tl-date">MBA Exchange</div>
+            <div class="edu-degree">International Exchange Program</div>
+            <div class="edu-school">Kenan-Flagler · UNC Chapel Hill</div>
+            <p class="edu-desc">Exchange semester at a top-20 U.S. MBA program. Gained deep exposure to corporate strategy, cross-cultural leadership, and the North American business landscape.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="eyebrow reveal">Contact</div>
+      <h2 class="section-heading reveal">Let's Build<br/><em>Something Great.</em></h2>
+      <p class="contact-p reveal">Whether you need a CRM implemented, a sales operation optimized, or a strategic technical project lead — I would be glad to connect and explore how I can contribute.</p>
+      <div class="contact-btns reveal">
+        <a href="mailto:your@email.com" class="btn-filled">✉ Send Email</a>
+        <a href="https://linkedin.com" target="_blank" class="btn-outline">LinkedIn</a>
+      </div>
+    </div>
+    <div class="contact-info reveal">
+      <div class="contact-info-item"><div class="ci-label">Location</div><div class="ci-val">Miami, Florida · USA</div></div>
+      <div class="contact-info-item"><div class="ci-label">Specialization</div><div class="ci-val">Salesforce CRM · Sales Ops · Technical PM</div></div>
+      <div class="contact-info-item"><div class="ci-label">Education</div><div class="ci-val">MBA — INCAE & UNC Kenan-Flagler</div></div>
+      <div class="contact-info-item"><div class="ci-label">Languages</div><div class="ci-val">English · Spanish</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Ronald Rivas. All rights reserved.</p>
+  <p>Designed with precision.</p>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+const bObs = new IntersectionObserver(e=>e.forEach(x=>{
+  if(x.isIntersecting){const f=x.target.querySelector('.skill-fill');if(f)f.style.width=f.dataset.w+'%';}
+}),{threshold:.3});
+document.querySelectorAll('.skill-item').forEach(el=>bObs.observe(el));
+
+const img=document.getElementById('profile-photo');
+if(img&&img.src.includes('YOUR_IMAGE_URL_HERE')){
+  img.style.display='none';
+  document.getElementById('photo-placeholder').style.display='flex';
+}
+</script>
+</body>
+</html>
